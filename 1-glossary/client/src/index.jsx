@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { EntryListView } from './entryListView.jsx';
 import { WordForm } from './wordForm.jsx';
+import {FilterView } from './filterView.jsx';
 
 const App = () => {
   const [entries, setEntries] = useState([]);
@@ -73,8 +74,24 @@ const App = () => {
     })
   }
 
+  const filterEntries = (query) => {
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:4000/filter',
+      data: {'query': query},
+      success: (data) => {
+        console.log('success get filter')
+        setEntries(data);
+      },
+      error: (err) => {
+        console.log('This is err from index.jsx GET /filter', err);
+      }
+    })
+  }
+
   return (
    <div>
+    <FilterView filterEntries={filterEntries} getEntries={getEntries} />
     <EntryListView entries={entries} editWord={editWord} deleteWord={deleteWord} />
     <WordForm addWord={addWord} />
    </div>

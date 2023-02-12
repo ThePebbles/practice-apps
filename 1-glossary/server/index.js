@@ -19,6 +19,18 @@ app.get('/', (req, res) => {
   res.redirect('/word');
 });
 
+app.get('/filter', (req, res) => {
+  var filter = req.query.query;
+  filter = filter.toLowerCase();
+  var regex = new RegExp(filter, 'i');
+  models.Entries.find({$or: [{'word': {$regex: regex}}, {'definition': {$regex: regex}}]})
+  .then((results) => {
+    console.log('results from filter: ', results);
+    res.status(200).send(results);
+  })
+  res.status(200).send[{'word': 'hello', 'definition': 'pebbles'}];
+})
+
 app.get('/word', (req, res) => {
   models.Entries.find({})
   .then((results) => {
