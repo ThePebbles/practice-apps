@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 })
 
@@ -43,10 +44,15 @@ app.post('/word', (req, res) => {
 });
 
 app.put('/word', (req, res) => {
+  console.log('req body: ', req.body)
   var oldWord = req.body.word.old;
   var newWord = req.body.word.new;
   var oldDefinition = req.body.definition.old;
-  var newDefinition = req.body.deifnition.new;
+  var newDefinition = req.body.definition.new;
+  // var oldWord = req.body.oldWord;
+  // var newWord = req.body.newWord;
+  // var oldDefinition = req.body.oldDefinition;
+  // var newDefinition = req.body.newDefinition;
   models.Entries.findOneAndReplace({'word': oldWord, 'definition': oldDefinition}, {'word': newWord, 'definition': newDefinition})
   .then((results) => {
     res.status(201).send(results);
