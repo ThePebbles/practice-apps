@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import $ from 'jquery';
 
 const FilterView = ({ filterEntries, getEntries }) => {
   const [filter, setFilter] = useState('');
@@ -17,7 +18,8 @@ const FilterView = ({ filterEntries, getEntries }) => {
       <button type='button' className='searchFilterButton' onClick={(element) => {
         filterWords();
       }}>Show Filtered Results</button>
-      <button type='button' className='clearFilterButton' onClick={() => {
+      <button type='button' className='clearFilterButton' onClick={(element) => {
+        $(element.target).siblings()[0].value = '';
         getEntries();
       }} >Clear Filters</button>
     </div>
