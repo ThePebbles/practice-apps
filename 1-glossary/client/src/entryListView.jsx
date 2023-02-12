@@ -37,15 +37,15 @@ const EntryListView = ({ entries, editWord, deleteWord }) => {
     var newDefinition = currentDefinition.length === 0 ? oldDefinition : currentDefinition;
     var oldWord1 = oldWord;
     var oldDefinition1 = oldDefinition;
-    $(element.target).siblings()[0].style = visibleStyle;
-    $(element.target).siblings()[1].style = visibleStyle;
-    $(element.target).siblings()[5].style = visibleStyle;
+    $(element.target).siblings()[0].style.display = 'block';
+    $(element.target).siblings()[1].style.display = 'block';
+    $(element.target).siblings()[5].style.display = 'block';
     element.target.style.display = 'none';
     $(element.target).siblings()[2].style.display = 'none';
     $(element.target).siblings()[2].value = '';
     $(element.target).siblings()[3].style.display = 'none';
     $(element.target).siblings()[3].value = '';
-    $(element.target).siblings()[4].style = visibleStyle;
+    $(element.target).siblings()[4].style.display = 'block';
     editWord(oldWord1, oldDefinition1, newWord, newDefinition);
   }
   const deleteEntry = (element) => {
@@ -55,7 +55,7 @@ const EntryListView = ({ entries, editWord, deleteWord }) => {
   }
   const entryList = entries.map((entry) => {
     return (
-      <div>
+      <div className='entry'>
         <div className='word' style={visibleStyle} word={entry.word}>
           {entry.word + ':'}
         </div>
