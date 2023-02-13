@@ -16,7 +16,25 @@ db.connectAsync()
   .then(() =>
     // Expand this table definition as needed:
     db.queryAsync(
-      "CREATE TABLE IF NOT EXISTS responses (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY)"
+      "CREATE TABLE IF NOT EXISTS account (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session VARCHAR(40), name TEXT, email TEXT, password TEXT)"
+    )
+  )
+  .then(() =>
+    // Expand this table definition as needed:
+    db.queryAsync(
+      "CREATE TABLE IF NOT EXISTS address (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session VARCHAR(40), lineOne TEXT, lineTwo TEXT, city TEXT, state TEXT, zipcode INT(5) NOT NULL)"
+    )
+  )
+  .then(() =>
+    // Expand this table definition as needed:
+    db.queryAsync(
+      "CREATE TABLE IF NOT EXISTS billing (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session VARCHAR(40), creditCardNumber BIGINT(25) NOT NULL, expiration INT(4) NOT NULL, cvv INT(3) NOT NULL, billingZipcode INT(5) NOT NULL)"
+    )
+  )
+  .then(() =>
+    // Expand this table definition as needed:
+    db.queryAsync(
+      "CREATE TABLE IF NOT EXISTS summary (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, session VARCHAR(40), didPurchase TINYINT)"
     )
   )
   .catch((err) => console.log(err));
