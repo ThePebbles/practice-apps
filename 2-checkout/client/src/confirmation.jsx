@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Confirmation = ({ currentPage, setCurrentPage, confirmationHandler, summary}) => {
+  console.log('summary: ', summary[0][0]);
   var styleSettings;
   if (currentPage === 'confirmation') {
     styleSettings = {
@@ -41,7 +42,7 @@ const Confirmation = ({ currentPage, setCurrentPage, confirmationHandler, summar
             <h3>State: {summary[0][0].state}</h3>
           </div>
           <div id='zipSummary' >
-            <h3>Zipcode: {summary[0][0].Zipcode}</h3>
+            <h3>Zipcode: {summary[0][0].zipcode}</h3>
           </div>
         </div>
         <h2>Billing Summary:</h2>
